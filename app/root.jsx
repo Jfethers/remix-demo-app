@@ -21,20 +21,12 @@ export const links = () => [
   },
 ]
 
-
-/**
- * 
- * <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Display&display=swap" rel="stylesheet">
- */
-
 export default function App() {
   return (
     <Document>
-      <Layout>
+      {/* <Layout> */} {/* which is then wrapped around your given route */}
         <Outlet/> {/* where the route you're on is injected */}
-      </Layout>
+      {/* </Layout> */}
     </Document>
   )
 }
@@ -55,18 +47,14 @@ function Document({ children, title }) {
   )
 }
 
-function Layout({ children }) {
-  return (
-    <>
-      <nav className='navbar'>
-        <Link to='/' className='logo'>Ravelry</Link>
-        <ul className='nav'>
-          <li>
-            <Link to='/projects'>Projects</Link>
-          </li>
-        </ul>
-      </nav>
-      { children }
-    </>
-  )
-}
+// you could use this as a universal nav bar
+// function Layout({ children }) {
+//   return (
+//     <>
+//       <nav className='navbar'>
+//         <Link to='/' className='logo'>Ravelry</Link>
+//       </nav>
+//       { children }
+//     </>
+//   )
+// }

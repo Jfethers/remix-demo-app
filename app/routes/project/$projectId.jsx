@@ -20,8 +20,13 @@ function Project() {
 
   return (
     <div>
+      <Link to={'/projects'}>Projects</Link>
       <h1>{project.name}</h1>
       <p>{project.made_for}</p>
+      <p>{project.pattern_name}</p>
+      <p>{project.status_name}</p>
+      <img src={project.photos[0].medium_url} height={'300px'}/>
+      <p>{project.notes}</p>
     </div>
   )
 }

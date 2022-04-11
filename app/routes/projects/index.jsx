@@ -1,8 +1,7 @@
 import { response } from 'express';
 import { useEffect } from 'react';
 import { useLoaderData, json, Link } from 'remix';
-
-// todo: put secrets somewhere idk lol
+// import styles from 
 
 export async function loader() {
 
@@ -20,7 +19,7 @@ function Home() {
   const { projects } = useLoaderData();
 
   return (
-    <>
+    <div>
       <h1>Projects</h1>
       { projects?.map((project, index) => {
         console.log('project', project);
@@ -34,7 +33,7 @@ function Home() {
         </div>
           )
       })}
-    </>
+    </div>
   )
 }
 
