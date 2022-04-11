@@ -30,39 +30,30 @@ function Home() {
       <h1>Projects</h1>
       <div className='row'>
         {projects?.map((project, index) => {
-
-          if (index % 2 === 1) {
+          console.log('project', project);
+          if (index % 2 === 0) {
             return (
-              <div key={project.id} className='column column-a'>
-                <Link to={`/project/${project.id}`}>
-                  <h1>{project.pattern_name}</h1>
-                  <img src={project.first_photo.thumbnail_url} />
-                </Link>
+              <div key={project.id} className='column'>
+                <div className='project'>
+                  <Link to={`/project/${project.id}`}>
+                    <img className='product-img' src={project.first_photo.medium_url} />
+                    <h1>{project.pattern_name}</h1>
+                  </Link>
+                </div>
               </div>
             )
           } else {
             return (
-              <></>
+              <div key={project.id} className='column'>
+                <div className='project'>
+                  <Link to={`/project/${project.id}`}>
+                    <img className='product-img' src={project.first_photo.medium_url} />
+                    <h1>{project.pattern_name}</h1>
+                  </Link>
+                </div>
+              </div>
             )
           }
-        })}
-        {projects?.map((project, index) => {
-          console.log('index', index % 2);
-          if (index % 2 === 1) {
-            <div key={project.id} className='column column-b'>
-              <Link to={`/project/${project.id}`}>
-                <h1>{project.pattern_name}</h1>
-                <img src={project.first_photo.thumbnail_url} />
-              </Link>
-            </div>
-          }
-          else {
-            return (
-            <></>
-            );
-          }
-
-
         })}
       </div>
     </div>

@@ -1,6 +1,7 @@
 .projectsRoute {
-  /* display: flex; */
-  /* flex-direction: column; */
+  padding: 50px;
+  max-width: 1000px;
+  margin: auto;
 }
 
 .row {
@@ -11,4 +12,31 @@
 
 .column {
   flex-basis: 100%;
+}
+
+.project {
+  padding: 25px;
+  height: 300;
+  width: 200px;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  text-align: center;
+}
+.project > a > h1 {
+  padding-top: 15px;
+}
+
+.product-img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+  height: auto;
+}
+
+@media screen and (min-width: 800px) {
+  .column {
+    flex: 1;
+  }
 }

@@ -49,6 +49,11 @@ table {
 }
 
 h1 {
-  font-size: 18px;
+  font-size: 16px;
   font-family: 'Noto Sans Display', sans-serif;
+}
+
+a { 
+	color: black;
+	text-decoration: none;
 }
