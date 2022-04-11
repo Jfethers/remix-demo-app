@@ -1,7 +1,14 @@
 import { response } from 'express';
 import { useEffect } from 'react';
 import { useLoaderData, json, Link } from 'remix';
-// import styles from 
+import styles from '~/routes/projects/styles.css';
+
+export const links = () => [
+  {
+    rel: 'stylesheet',
+    href: styles
+  },
+]
 
 export async function loader() {
 
@@ -19,20 +26,45 @@ function Home() {
   const { projects } = useLoaderData();
 
   return (
-    <div>
+    <div className='projectsRoute'>
       <h1>Projects</h1>
-      { projects?.map((project, index) => {
-        console.log('project', project);
-        return (
+      <div className='row'>
+        {projects?.map((project, index) => {
 
-          <div key={index}>
-            <Link to={`/project/${project.id}`}>
-              <h1>{project.pattern_name}</h1>
-              <img src={project.first_photo.thumbnail_url} />
-            </Link>
-        </div>
-          )
-      })}
+          if (index % 2 === 1) {
+            return (
+              <div key={project.id} className='column column-a'>
+                <Link to={`/project/${project.id}`}>
+                  <h1>{project.pattern_name}</h1>
+                  <img src={project.first_photo.thumbnail_url} />
+                </Link>
+              </div>
+            )
+          } else {
+            return (
+              <></>
+            )
+          }
+        })}
+        {projects?.map((project, index) => {
+          console.log('index', index % 2);
+          if (index % 2 === 1) {
+            <div key={project.id} className='column column-b'>
+              <Link to={`/project/${project.id}`}>
+                <h1>{project.pattern_name}</h1>
+                <img src={project.first_photo.thumbnail_url} />
+              </Link>
+            </div>
+          }
+          else {
+            return (
+            <></>
+            );
+          }
+
+
+        })}
+      </div>
     </div>
   )
 }
