@@ -1,6 +1,6 @@
 import { response } from 'express';
 import { useEffect } from 'react';
-import { useLoaderData, json, Link } from 'remix';
+import { useLoaderData, json, Link, Outlet } from 'remix';
 import styles from '~/routes/projects/styles.css';
 
 export const links = () => [
@@ -56,6 +56,7 @@ function Home() {
           }
         })}
       </div>
+      <Outlet />
     </div>
   )
 }

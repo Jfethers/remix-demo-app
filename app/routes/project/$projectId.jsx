@@ -1,5 +1,5 @@
 import { response } from 'express';
-import { useLoaderData, json, Link } from 'remix';
+import { useLoaderData, json, Link, Outlet } from 'remix';
 
 
 export async function loader(params) {
@@ -27,6 +27,7 @@ function Project() {
       <p>{project.status_name}</p>
       <img src={project.photos[0].medium_url} height={'300px'}/>
       <p>{project.notes}</p>
+      <Outlet project={project} />
     </div>
   )
 }
