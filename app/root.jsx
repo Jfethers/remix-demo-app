@@ -58,3 +58,13 @@ function Document({ children, title }) {
 //     </>
 //   )
 // }
+
+export function ErrorBoundary({ error }) {
+  console.log('error', error);
+  return (
+    <Document>
+      <h1>error</h1>
+      <pre>{error.message}</pre>
+    </Document>
+  )
+}

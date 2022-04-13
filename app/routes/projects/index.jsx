@@ -10,7 +10,7 @@ export const links = () => [
   },
 ]
 
-export async function loader() {
+export const loader = async () => {
 
   const headers = new Headers();
   const user = process.env.USERNAME;
@@ -20,8 +20,8 @@ export async function loader() {
   const res = await fetch('https://api.ravelry.com/projects/noone1200/list.json', { method: 'GET', headers: headers });
   return json(await res.json());
 }
-function Home() {
 
+function Home() {
 
   const { projects } = useLoaderData();
 
@@ -30,7 +30,6 @@ function Home() {
       <h1>Projects</h1>
       <div className='row'>
         {projects?.map((project, index) => {
-          console.log('project', project);
           if (index % 2 === 0) {
             return (
               <div key={project.id} className='column'>

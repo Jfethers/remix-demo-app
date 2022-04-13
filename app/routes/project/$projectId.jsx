@@ -2,12 +2,12 @@ import { response } from 'express';
 import { useLoaderData, json, Link, Outlet } from 'remix';
 
 
-export async function loader(params) {
+export const loader = async ({params}) => {
 
   const headers = new Headers();
   const user = process.env.USERNAME;
   const password = process.env.PASSKEY;
-  const projectId = params.params.projectId;
+  const projectId = params.projectId;
 
   headers.append('Authorization', 'Basic ' + btoa(`${user}:${password}`));
 
@@ -22,6 +22,7 @@ function Project() {
     <div>
       <Link to={'/projects'}>Projects</Link>
       <h1>{project.name}</h1>
+      <Link to={`/project/${project.id}/edit`}>EDIT</Link>
       <p>{project.made_for}</p>
       <p>{project.pattern_name}</p>
       <p>{project.status_name}</p>
