@@ -30,13 +30,14 @@ function Home() {
       <h1>Projects</h1>
       <div className='row'>
         {projects?.map((project, index) => {
+          console.log('project', project);
           if (index % 2 === 0) {
             return (
               <div key={project.id} className='column'>
                 <div className='project'>
                   <Link to={`/project/${project.id}`}>
                     <img className='product-img' src={project.first_photo.medium_url} />
-                    <h1>{project.pattern_name}</h1>
+                    <h1>{project.name}</h1>
                   </Link>
                 </div>
               </div>
@@ -47,7 +48,7 @@ function Home() {
                 <div className='project'>
                   <Link to={`/project/${project.id}`}>
                     <img className='product-img' src={project.first_photo.medium_url} />
-                    <h1>{project.pattern_name}</h1>
+                    <h1>{project.name}</h1>
                   </Link>
                 </div>
               </div>
