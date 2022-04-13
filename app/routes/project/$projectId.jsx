@@ -1,6 +1,12 @@
 import { response } from 'express';
 import { useLoaderData, json, Link, Outlet } from 'remix';
+import styles from './styles.css'
+import Button from '@mui/material/Button';
 
+export const links = () => [{
+  rel: 'stylesheet',
+  href: styles,
+}]
 
 export const loader = async ({params}) => {
 
@@ -19,15 +25,18 @@ function Project() {
   const { project } = useLoaderData();
 
   return (
-    <div>
-      <Link to={'/projects'}>Projects</Link>
+    <div className='project-wrapper'>
       <h1>{project.name}</h1>
-      <Link to={`/project/${project.id}/edit`}>EDIT</Link>
-      <p>{project.made_for}</p>
-      <p>{project.pattern_name}</p>
-      <p>{project.status_name}</p>
-      <img src={project.photos[0].medium_url} height={'300px'}/>
-      <p>{project.notes}</p>
+      <div className='project-body'>
+        <p>{project.made_for}</p>
+        <p>{project.pattern_name}</p>
+        <p>{project.status_name}</p>
+        <img src={project.photos[0].medium_url} height={'300px'}/>
+        <p>{project.notes}</p>
+      </div>
+      <Button className='button' variant='contained' to={`/project/${project.id}/edit`}>
+        <Link component={Link} to={`/project/${project.id}/edit`}>Edit Project</Link>
+      </Button>
       <Outlet project={project} />
     </div>
   )

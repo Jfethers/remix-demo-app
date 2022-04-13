@@ -1,6 +1,7 @@
 import React from 'react';
 import { Form } from "@remix-run/react";
 import { useLoaderData, json, Link, Outlet, redirect } from 'remix';
+import Button from '@mui/material/Button';
 
 export const loader = async ({ params }) => {
 
@@ -54,7 +55,7 @@ function editPost() {
         <input defaultValue={project.name} name='name' required={true} />
         <label htmlFor='name'>Made For</label>
         <input defaultValue={project.made_for} name='made_for' />
-        <button className='button' type='submit'>Update Project</button>
+        <Button className='button' variant='contained' type='submit'>Update Project</Button>
       </Form>
     </div>
   )

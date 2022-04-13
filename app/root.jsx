@@ -2,6 +2,7 @@ import { Outlet, LiveReload, Link, Links, Meta } from 'remix';
 import globalStylesUrl from '~/styles/global.css'
 import 'dotenv/config';
 
+
 export const links = () => [
   {
   rel: 'stylesheet',
@@ -17,8 +18,12 @@ export const links = () => [
   },
   {
     rel: 'stylesheet',
-    href: 'https://fonts.googleapis.com/css2?family=Noto+Sans+Display&display=swap'
+    href: 'https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap'
   },
+  {
+    rel: 'stylesheet',
+    href: 'https://fonts.googleapis.com/icon?family=Material+Icons',
+  }
 ]
 
 export default function App() {
@@ -47,17 +52,16 @@ function Document({ children, title }) {
   )
 }
 
-// you could use this as a universal nav bar
-// function Layout({ children }) {
-//   return (
-//     <>
-//       <nav className='navbar'>
-//         <Link to='/' className='logo'>Ravelry</Link>
-//       </nav>
-//       { children }
-//     </>
-//   )
-// }
+function Layout({ children }) {
+  return (
+    <>
+      <nav className='navbar'>
+        <Link to='/projects' className='projects'>Projects</Link>
+      </nav>
+      { children }
+    </>
+  )
+}
 
 export function ErrorBoundary({ error }) {
   console.log('error', error);
