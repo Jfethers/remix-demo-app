@@ -3,7 +3,6 @@
   License: none (public domain)
 */
 
-
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
@@ -50,7 +49,7 @@ table {
 
 h1 {
   font-size: 18px;
-  /* font-family: 'Noto Sans Display', sans-serif; */
+	font-family: 'Roboto', sans-serif;
 }
 
 a { 
@@ -60,5 +59,24 @@ a {
 
 p {
 	font-size: 16px;
-	/* font-family: 'Noto Sans Display', sans-serif; */
+	font-family: 'Roboto', sans-serif;
+}
+
+button {
+	height: 50px;
+	width: 160px;
+	border-radius: 5px;
+	background-color: #3C87CD;
+	border: none;
+	color: white;
+	font-size: 13px;
+	font-weight:500;
+	cursor: pointer;
+	text-transform: uppercase;
+	font-family: 'Roboto';
+	letter-spacing: 2px;
+	transition: background-color 200ms ease-in;
+}
+button:hover {
+	background-color: #2E72B2;
 }

@@ -34,9 +34,7 @@ function Project() {
         <img src={project.photos[0].medium_url} height={'300px'}/>
         <p>{project.notes}</p>
       </div>
-      <Button className='button' variant='contained' to={`/project/${project.id}/edit`}>
-        <Link component={Link} to={`/project/${project.id}/edit`}>Edit Project</Link>
-      </Button>
+      <Link className='project-link' to={`/project/${project.id}/edit`}> Edit Project </Link>
       <Outlet project={project} />
     </div>
   )

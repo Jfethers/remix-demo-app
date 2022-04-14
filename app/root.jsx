@@ -1,6 +1,7 @@
 import { Outlet, LiveReload, Link, Links, Meta } from 'remix';
 import globalStylesUrl from '~/styles/global.css'
 import 'dotenv/config';
+import { Container } from '@mui/material';
 
 
 export const links = () => [
@@ -20,19 +21,17 @@ export const links = () => [
     rel: 'stylesheet',
     href: 'https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap'
   },
-  {
-    rel: 'stylesheet',
-    href: 'https://fonts.googleapis.com/icon?family=Material+Icons',
-  }
 ]
 
 export default function App() {
   return (
-    <Document>
-      {/* <Layout> */} {/* which is then wrapped around your given route */}
-        <Outlet/> {/* where the route you're on is injected */}
-      {/* </Layout> */}
-    </Document>
+    <Container maxWidth='lg'>
+      <Document>
+        {/* <Layout> */} {/* which is then wrapped around your given route */}
+          <Outlet/> {/* where the route you're on is injected */}
+        {/* </Layout> */}
+      </Document>
+    </Container>
   )
 }
 
