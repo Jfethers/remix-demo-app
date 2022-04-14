@@ -23,20 +23,27 @@ export const loader = async ({params}) => {
 
 function Project() {
   const { project } = useLoaderData();
+  console.log('project', project);
 
   return (
-    <div className='project-wrapper'>
-      <h1>{project.name}</h1>
-      <div className='project-body'>
-        <p>{project.made_for}</p>
-        <p>{project.pattern_name}</p>
-        <p>{project.status_name}</p>
-        <img src={project.photos[0].medium_url} height={'300px'}/>
-        <p>{project.notes}</p>
+    <>
+      <div className='project-wrapper'>
+        <div className='img-wrapper'>
+          <img src={project.photos[0].medium_url} height={'300px'}/>
+        </div>
+        <div className='project-body'>
+          <h1>{project.name}</h1>
+          <p>Made For: {project.made_for}</p>
+          <p>Pattern Name: {project.pattern_name}</p>
+          <p>Project Status: {project.status_name}</p>
+          <p>Start Date: {project.started}</p>
+          <p>Completed: {project.completed}</p>
+          <p>{project.notes}</p>
+        </div>
+        <Outlet project={project} />
       </div>
       <Link className='project-link' to={`/project/${project.id}/edit`}> Edit Project </Link>
-      <Outlet project={project} />
-    </div>
+    </>
   )
 }
 

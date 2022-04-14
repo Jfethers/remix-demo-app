@@ -1,7 +1,7 @@
 import { Outlet, LiveReload, Link, Links, Meta } from 'remix';
 import globalStylesUrl from '~/styles/global.css'
 import 'dotenv/config';
-import { Container } from '@mui/material';
+import { Container, CssBaseline } from '@mui/material';
 
 
 export const links = () => [
@@ -27,9 +27,9 @@ export default function App() {
   return (
     <Container maxWidth='lg'>
       <Document>
-        {/* <Layout> */} {/* which is then wrapped around your given route */}
-          <Outlet/> {/* where the route you're on is injected */}
-        {/* </Layout> */}
+        <Layout>
+          <Outlet/>
+        </Layout>
       </Document>
     </Container>
   )
@@ -55,7 +55,7 @@ function Layout({ children }) {
   return (
     <>
       <nav className='navbar'>
-        <Link to='/projects' className='projects'>Projects</Link>
+        <Link className='link-button' to='/projects'>Projects</Link>
       </nav>
       { children }
     </>

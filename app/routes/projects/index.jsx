@@ -2,6 +2,7 @@ import { response } from 'express';
 import { useEffect } from 'react';
 import { useLoaderData, json, Link, Outlet } from 'remix';
 import styles from '~/routes/projects/styles.css';
+import { ImageList, ImageListItem, ImageListItemBar, IconButton } from '@mui/material';
 
 export const links = () => [
   {
@@ -27,35 +28,23 @@ function Home() {
 
   return (
     <div className='projectsRoute'>
-      <h1>Projects</h1>
-      <div className='row'>
-        {projects?.map((project, index) => {
-          console.log('project', project);
-          if (index % 2 === 0) {
-            return (
-              <div key={project.id} className='column'>
-                <div className='project'>
-                  <Link to={`/project/${project.id}`}>
-                    <img className='product-img' src={project.first_photo.medium_url} />
-                    <h1>{project.name}</h1>
-                  </Link>
-                </div>
-              </div>
-            )
-          } else {
-            return (
-              <div key={project.id} className='column'>
-                <div className='project'>
-                  <Link to={`/project/${project.id}`}>
-                    <img className='product-img' src={project.first_photo.medium_url} />
-                    <h1>{project.name}</h1>
-                  </Link>
-                </div>
-              </div>
-            )
-          }
-        })}
-      </div>
+      <ImageList sx={{ width: 1000, height: 1000 }} cols={3} rowHeight={300}>
+        {projects.map((project) => (
+          <Link to={`/project/${project.id}`}>
+            <ImageListItem key={project.id}>
+              <img
+                src={`${project.first_photo.medium_url}?w=164&h=164&fit=crop&auto=format`}
+                srcSet={`${project.first_photo.medium_url}?w=164&h=164&fit=crop&auto=format&dpr=2 2x`}
+                alt={project.name}
+                loading="lazy"
+              />
+              <ImageListItemBar
+              title={project.name}
+              />
+            </ImageListItem>
+          </Link>
+        ))}
+      </ImageList>
       <Outlet />
     </div>
   )

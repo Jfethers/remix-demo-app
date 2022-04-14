@@ -55,6 +55,11 @@ h1 {
 a { 
 	color: black;
 	text-decoration: none;
+	font-family: 'Roboto', sans-serif;
+	text-transform: uppercase;
+	letter-spacing: 1.5px;
+	font-size: 13px;
+	font-weight: 500;
 }
 
 p {
@@ -74,9 +79,16 @@ button {
 	cursor: pointer;
 	text-transform: uppercase;
 	font-family: 'Roboto';
-	letter-spacing: 2px;
+	letter-spacing: 1.5px;
 	transition: background-color 200ms ease-in;
 }
 button:hover {
 	background-color: #2E72B2;
+}
+
+.navbar {
+	height: 50px;
+	width: 50px;
+	display: flex;
+	align-items: center;
 }
