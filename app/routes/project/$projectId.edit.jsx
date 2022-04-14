@@ -1,7 +1,13 @@
 import React from 'react';
 import { Form } from "@remix-run/react";
-import { useLoaderData, json, Link, Outlet, redirect } from 'remix';
+import { useLoaderData, json, Link, Outlet, redirect, useActionData } from 'remix';
 
+
+/**
+ * 
+ * to do: 
+ * add in validations
+ */
 export const loader = async ({ params }) => {
 
   const headers = new Headers();
@@ -16,6 +22,11 @@ export const loader = async ({ params }) => {
   return json(await res.json());
 }
 
+const validateName = name => {
+  if (name.length == 0) {
+    return 'Name is required!'
+  }
+}
 export const action = async ({ request, params }) => {
   // console.log('params', params);
   const user = process.env.USERNAME;
@@ -27,6 +38,15 @@ export const action = async ({ request, params }) => {
 
   const formData = await request.formData();
   const formValues = Object.fromEntries(formData);
+
+  const fieldErrors = {
+    name: validateName(formValues.name)
+  }
+  
+  if (Object.values(fieldErrors).some(Boolean)) {
+    console.log(fieldErrors);
+    return json({fieldErrors, formValues}, { status: 400});
+  }
 
   const requestOptions = {
     method: 'POST',
@@ -45,13 +65,17 @@ export const action = async ({ request, params }) => {
 
 function editPost() {
   const { project } = useLoaderData();
+  const actionData = useActionData();
+  console.log('actionData', actionData);
 
   return (
     <div className='edit-form-wrapper'>
       <Link to='/projects'>Back</Link>
       <Form method='post'>
         <label htmlFor='name'>Project Name</label>
-        <input defaultValue={project.name} name='name' required={true} />
+        {/* <input defaultValue={actionData?.formValues?.name || project?.name} name='name' /> */}
+        <input defaultValue={project?.name} name='name' />
+        {/* <div className='form-error'><p>{actionData?.fieldErrors?.name && (actionData?.fieldErrors?.name) }</p></div> */}
         <label htmlFor='name'>Made For</label>
         <input defaultValue={project.made_for} name='made_for' />
         <button className='button' type='submit'>Update Project</button>

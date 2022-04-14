@@ -1,12 +1,21 @@
 .project-wrapper {
   display: flex;
   justify-content: center;
-  align-items: center;
+  /* align-items: center; */
   flex-direction: row;
+  flex-grow: 1;
+  margin-top: 25px;
 }
 .project-body {
   display: flex;
   flex-direction: column;
+  align-self: stretch;
+  margin-left: 25px;
+  overflow-x: hidden;
+  max-width: 800px;
+  max-height: 800px;
+  position: relative;
+  /* top: 25px; */
 }
 .project-body > p {
   padding: 15px 0;
@@ -15,22 +24,11 @@
 .project-link {
 	height: 50px;
 	width: 160px;
-	border-radius: 5px;
-	background-color: #3C87CD;
-	border: none;
-	color: white;
 	font-size: 13px;
 	font-weight:500;
 	cursor: pointer;
 	text-transform: uppercase;
 	font-family: 'Roboto';
 	letter-spacing: 2px;
-	transition: background-color 200ms ease-in;
-  text-align: center;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.project-link:hover {
-	background-color: #2E72B2;
+  margin-top: 20px;
 }

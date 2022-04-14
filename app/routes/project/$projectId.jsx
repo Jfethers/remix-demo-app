@@ -1,14 +1,14 @@
 import { response } from 'express';
 import { useLoaderData, json, Link, Outlet } from 'remix';
 import styles from './styles.css'
-import Button from '@mui/material/Button';
+import { ImageList, ImageListItem } from '@mui/material';
 
 export const links = () => [{
   rel: 'stylesheet',
   href: styles,
 }]
 
-export const loader = async ({params}) => {
+export const loader = async ({ params }) => {
 
   const headers = new Headers();
   const user = process.env.USERNAME;
@@ -25,12 +25,30 @@ function Project() {
   const { project } = useLoaderData();
   console.log('project', project);
 
+  const srcset = (image, size, rows = 1, cols = 1) => {
+    return {
+      src: `${image}?w=${size * cols}&h=${size * rows}&fit=crop&auto=format`,
+      srcSet: `${image}?w=${size * cols}&h=${size * rows
+        }&fit=crop&auto=format&dpr=2 2x`,
+    };
+  }
+
+
   return (
     <>
       <div className='project-wrapper'>
-        <div className='img-wrapper'>
-          <img src={project.photos[0].medium_url} height={'300px'}/>
-        </div>
+        <ImageList sx={{ width: '100%', height: 600 }} cols={2} rowHeight={200}>
+          {project?.photos?.map((photo) => (
+            <ImageListItem key={photo.id}>
+              <img
+                src={`${photo.medium_url}?w=164&h=164&fit=crop&auto=format`}
+                srcSet={`${photo.medium_url}?w=164&h=164&fit=crop&auto=format&dpr=2 2x`}
+                alt={photo.name}
+                loading="lazy"
+              />
+            </ImageListItem>
+          ))}
+        </ImageList>
         <div className='project-body'>
           <h1>{project.name}</h1>
           <p>Made For: {project.made_for}</p>
@@ -39,10 +57,10 @@ function Project() {
           <p>Start Date: {project.started}</p>
           <p>Completed: {project.completed}</p>
           <p>{project.notes}</p>
+          <Link className='project-link' to={`/project/${project.id}/edit`}> Edit Project </Link>
         </div>
         <Outlet project={project} />
       </div>
-      <Link className='project-link' to={`/project/${project.id}/edit`}> Edit Project </Link>
     </>
   )
 }
