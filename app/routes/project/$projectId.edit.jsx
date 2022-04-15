@@ -1,13 +1,13 @@
 import React from 'react';
 import { Form } from "@remix-run/react";
 import { useLoaderData, json, Link, Outlet, redirect, useActionData } from 'remix';
+import styles from './styles.css';
+import { TextField } from '@mui/material';
 
-
-/**
- * 
- * to do: 
- * add in validations
- */
+export const links = () => [{
+  rel: 'stylesheet',
+  href: styles, 
+}]
 export const loader = async ({ params }) => {
 
   const headers = new Headers();
@@ -42,10 +42,10 @@ export const action = async ({ request, params }) => {
   const fieldErrors = {
     name: validateName(formValues.name)
   }
-  
+
   if (Object.values(fieldErrors).some(Boolean)) {
     console.log(fieldErrors);
-    return json({fieldErrors, formValues}, { status: 400});
+    return json({ fieldErrors, formValues }, { status: 400 });
   }
 
   const requestOptions = {
@@ -71,13 +71,21 @@ function editPost() {
   return (
     <div className='edit-form-wrapper'>
       <Link to='/projects'>Back</Link>
-      <Form method='post'>
-        <label htmlFor='name'>Project Name</label>
-        {/* <input defaultValue={actionData?.formValues?.name || project?.name} name='name' /> */}
-        <input defaultValue={project?.name} name='name' />
-        {/* <div className='form-error'><p>{actionData?.fieldErrors?.name && (actionData?.fieldErrors?.name) }</p></div> */}
-        <label htmlFor='name'>Made For</label>
-        <input defaultValue={project.made_for} name='made_for' />
+      <Form method='post' className='edit-form'>
+        <TextField defaultValue={project.name} required={true} id="filled-basic" label="Project Name" variant="filled" name={project?.name}/>
+        <TextField defaultValue={project.made_for} id="filled-basic" label="Made For" variant="filled" name={project?.made_for}/>
+        <TextField defaultValue={project.progress} id="filled-basic" label="Progress" variant="filled" name={project?.progress}/>
+        <TextField defaultValue={project.rating} id="filled-basic" label="Project Rating" variant="filled" name={project?.rating}/>
+        <TextField defaultValue={project.craft_name} id="filled-basic" label="Craft Name" variant="filled" name={project?.craft_name}/>
+        {project.needle_sizes.map(needle => {
+          return (
+            <div className='needles'>
+              <TextField defaultValue={needle.us} id="filled-basic" label="US Needle Size" variant="filled" name={needle.us}/>
+
+              <TextField defaultValue={needle.metric} id="filled-basic" label="Metric Needle Size" variant="filled" name={needle.metric}/>
+            </div>
+          )
+        })}
         <button className='button' type='submit'>Update Project</button>
       </Form>
     </div>

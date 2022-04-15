@@ -66,7 +66,7 @@ export function ErrorBoundary({ error }) {
   console.log('error', error);
   return (
     <Document>
-      <h1>error</h1>
+      <h1>Error</h1>
       <pre>{error.message}</pre>
     </Document>
   )

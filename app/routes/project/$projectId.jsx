@@ -59,7 +59,7 @@ function Project() {
           <p>{project.notes}</p>
           <Link className='project-link' to={`/project/${project.id}/edit`}> Edit Project </Link>
         </div>
-        <Outlet project={project} />
+        <Outlet />
       </div>
     </>
   )
