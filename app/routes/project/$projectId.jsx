@@ -14,7 +14,6 @@ export const loader = async ({ params }) => {
   const user = process.env.USERNAME;
   const password = process.env.PASSKEY;
   const projectId = params.projectId;
-  console.log('projectId', projectId);
 
   headers.append('Authorization', 'Basic ' + btoa(`${user}:${password}`));
 
@@ -24,7 +23,6 @@ export const loader = async ({ params }) => {
 
 function Project() {
   const { project } = useLoaderData();
-  console.log('project', project);
 
   return (
     <>

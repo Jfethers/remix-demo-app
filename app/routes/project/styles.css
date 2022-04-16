@@ -41,6 +41,11 @@
   margin: 50px auto;
 }
 
+.edit-form-wrapper h1 {
+  text-align: center;
+  margin-top: 50px;
+}
+
 .edit-form-wrapper .edit-form input {
   height: 30px;
 }
