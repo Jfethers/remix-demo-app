@@ -2,19 +2,13 @@ import React from 'react';
 import { Form } from "@remix-run/react";
 import { useLoaderData, json, Link, Outlet, redirect, useActionData } from 'remix';
 import styles from './styles.css';
-import { TextField } from '@mui/material';
+import { TextField, Button } from '@mui/material';
 import errorImg from '../../assets/error.jpg';
 
 export const links = () => [{
   rel: 'stylesheet',
   href: styles, 
 },
-// {
-//   rel: 'prefetch',
-//   as: 'image',
-//   href: '../../public/error.jpg',
-// },
-
 ]
 export const loader = async ({ params }) => {
 
@@ -29,13 +23,7 @@ export const loader = async ({ params }) => {
   return json(await res.json());
 }
 
-const validateName = name => {
-  if (name?.length == 0) {
-    return 'Name is required!'
-  }
-}
 export const action = async ({ request, params }) => {
-  // console.log('params', params);
   const user = process.env.USERNAME;
   const password = process.env.PASSKEY;
   const projectId = params.projectId;
@@ -45,15 +33,6 @@ export const action = async ({ request, params }) => {
 
   const formData = await request.formData();
   const formValues = Object.fromEntries(formData);
-
-  const fieldErrors = {
-    name: validateName(formValues.name)
-  }
-
-  if (Object.values(fieldErrors).some(Boolean)) {
-    console.log(fieldErrors);
-    return json({ fieldErrors, formValues }, { status: 400 });
-  }
 
   const requestOptions = {
     method: 'POST',
@@ -72,19 +51,19 @@ export const action = async ({ request, params }) => {
 
 function editPost() {
   const { project } = useLoaderData();
-  const actionData = useActionData();
-  console.log('actionData', actionData);
 
   return (
+    <>
+    <Link to={`/project/${project.id}`}>Back</Link>
+    <h1>Edit {project.name}</h1>
     <div className='edit-form-wrapper'>
-      <Link to='/projects'>Back</Link>
       <Form method='post' className='edit-form'>
-        <TextField defaultValue={project.name} required={true} id="filled-basic" label="Project Name" variant="filled" name={project?.name}/>
+        <TextField defaultValue={project?.name} required={true} id="filled-basic" label="Project Name" variant="filled" name={project?.name}/>
         <TextField defaultValue={project.made_for} id="filled-basic" label="Made For" variant="filled" name={project?.made_for}/>
-        <TextField defaultValue={project.progress} id="filled-basic" label="Progress" variant="filled" name={project?.progress}/>
-        <TextField defaultValue={project.rating} id="filled-basic" label="Project Rating" variant="filled" name={project?.rating}/>
-        <TextField defaultValue={project.craft_name} id="filled-basic" label="Craft Name" variant="filled" name={project?.craft_name}/>
-        {project.needle_sizes.map(needle => {
+        <TextField defaultValue={project?.progress} id="filled-basic" label="Progress" variant="filled" name={project?.progress}/>
+        <TextField defaultValue={project?.rating} id="filled-basic" label="Project Rating" variant="filled" name={project?.rating}/>
+        <TextField defaultValue={project?.craft_name} id="filled-basic" label="Craft Name" variant="filled" name={project?.craft_name}/>
+        {project?.needle_sizes?.map(needle => {
           return (
             <div className='needles'>
               <TextField defaultValue={needle.us} id="filled-basic" label="US Needle Size" variant="filled" name={needle.us}/>
@@ -93,9 +72,10 @@ function editPost() {
             </div>
           )
         })}
-        <Link className='button' type='submit'>Update Project</Link>
+        <Button className='button' variant='text' type='submit'>Update Project</Button>
       </Form>
     </div>
+    </>
   )
 }
 

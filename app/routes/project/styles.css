@@ -38,13 +38,16 @@
   flex-direction: column;
   justify-content: center;
   max-width: 800px;
+  margin: 50px auto;
 }
 
 .edit-form-wrapper .edit-form input {
   height: 30px;
-  outline: none;
 }
 
+.edit-form-wrapper .MuiFormControl-root {
+  margin-bottom: 20px;
+}
 .error-wrapper {
   display: flex;
   justify-content: center;
