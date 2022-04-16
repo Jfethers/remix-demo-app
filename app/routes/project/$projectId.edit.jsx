@@ -3,11 +3,19 @@ import { Form } from "@remix-run/react";
 import { useLoaderData, json, Link, Outlet, redirect, useActionData } from 'remix';
 import styles from './styles.css';
 import { TextField } from '@mui/material';
+import errorImg from '../../assets/error.jpg';
 
 export const links = () => [{
   rel: 'stylesheet',
   href: styles, 
-}]
+},
+// {
+//   rel: 'prefetch',
+//   as: 'image',
+//   href: '../../public/error.jpg',
+// },
+
+]
 export const loader = async ({ params }) => {
 
   const headers = new Headers();
@@ -18,12 +26,11 @@ export const loader = async ({ params }) => {
   headers.append('Authorization', 'Basic ' + btoa(`${user}:${password}`));
 
   const res = await fetch(`https://api.ravelry.com/projects/noone1200/${projectId}.json`, { method: 'GET', headers: headers });
-  // console.log('res', res);
   return json(await res.json());
 }
 
 const validateName = name => {
-  if (name.length == 0) {
+  if (name?.length == 0) {
     return 'Name is required!'
   }
 }
@@ -86,8 +93,20 @@ function editPost() {
             </div>
           )
         })}
-        <button className='button' type='submit'>Update Project</button>
+        <Link className='button' type='submit'>Update Project</Link>
       </Form>
+    </div>
+  )
+}
+
+export function ErrorBoundary({ error }) {
+
+  return (
+    <div className='error-wrapper'>
+      <h1>Uh Oh - Looks like we dropped a stitch</h1>
+      <p className='error-message'>Error: {error.message}</p>
+      <img className='error-img' src={errorImg} height='400' width='400'/>
+      <Link to={'/projects'}>Go Back to Projects</Link>
     </div>
   )
 }

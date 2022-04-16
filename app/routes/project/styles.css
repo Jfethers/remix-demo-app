@@ -44,3 +44,20 @@
   height: 30px;
   outline: none;
 }
+
+.error-wrapper {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 75px;
+}
+
+.error-wrapper .error-message {
+  color: #E70E02;
+  font-weight: 700;
+}
+
+.error-wrapper .error-img {
+  padding: 20px 0;
+}
