@@ -4,6 +4,9 @@ import { useLoaderData, json, Link, Outlet, redirect, useActionData } from 'remi
 import styles from './styles.css';
 import { TextField, Button, Grid } from '@mui/material';
 import errorImg from '../../assets/error.jpg';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
 
 export const links = () => [{
   rel: 'stylesheet',
@@ -50,29 +53,25 @@ export const action = async ({ request, params }) => {
   return redirect(`/project/${projectId}`);
 }
 
+const handleCraftChange = e => {
+
+}
+
 function editPost() {
   const { project } = useLoaderData();
-
+  // console.log('project', project);
   return (
-      <div className='edit-form-wrapper'>
-        <h1>Edit {project.name}</h1>
-        <Form method='post' className='edit-form'>
-          <TextField defaultValue={project?.name} required={true} id="filled-basic" label="Project Name" variant="filled" name='name' />
-          <TextField defaultValue={project.made_for} id="filled-basic" label="Made For" variant="filled" name={'made_for'} />
-          <TextField defaultValue={project?.progress} id="filled-basic" label="Progress" variant="filled" name={'progress'} />
-          <TextField defaultValue={project?.rating} id="filled-basic" label="Project Rating" variant="filled" name={'rating'} />
-          <TextField defaultValue={project?.craft_name} id="filled-basic" label="Craft Name" variant="filled" name={'craft_name'} />
-          {/* {project?.needle_sizes?.map(needle => {
-            return (
-              <div key={needle.id}>
-                <TextField defaultValue={needle.us} id="filled-basic" label="US Needle Size" variant="filled" name={needle.us} />
-                <TextField defaultValue={needle.metric} id="filled-basic" label="Metric Needle Size" variant="filled" name={needle.metric} />
-              </div>
-            )
-          })} */}
-          <Button className='button' variant='text' type='submit'>Update Project</Button>
-        </Form>
-      </div>
+    <div className='edit-form-wrapper'>
+      <h1>Edit {project.name}</h1>
+      <Form method='post' className='edit-form'>
+        <TextField defaultValue={project?.name} required={true} id="filled-basic" label="Project Name" variant="filled" name='name' />
+        <TextField defaultValue={project.made_for} id="filled-basic" label="Made For" variant="filled" name={'made_for'} />
+        <TextField defaultValue={project?.progress} id="filled-basic" label="Progress" variant="filled" name={'progress'} />
+        <TextField defaultValue={project?.rating} id="filled-basic" label="Project Rating" variant="filled" name={'rating'} />
+        <TextField defaultValue={project?.craft_name} id="filled-basic" label="Craft Name" variant="filled" name={'craft_name'} />
+        <Button className='button' variant='text' type='submit'>Update Project</Button>
+      </Form>
+    </div>
   )
 }
 
