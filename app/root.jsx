@@ -55,7 +55,9 @@ function Layout({ children }) {
   return (
     <>
       <nav className='navbar'>
+        <Link className='link-button' to='/'>Home</Link>
         <Link className='link-button' to='/projects'>Projects</Link>
+        <Link className='link-button' to='/projects/add'>New Project</Link>
       </nav>
       { children }
     </>
